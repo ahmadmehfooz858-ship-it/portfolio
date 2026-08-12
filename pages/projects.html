@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects | Syed Awais Mahmood</title>
+  <link rel="icon" type="image/png" href="../images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@600;700;800;900&display=swap" as="style" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/pillnav.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/transitions.css" />
+  <!-- Warm the cache for the other pages so navigating feels instant -->
+  <link rel="prefetch" href="../index.html" />
+  <link rel="prefetch" href="../pages/about.html" />
+  <link rel="prefetch" href="../pages/skills.html" />
+  <link rel="prefetch" href="../pages/contact.html" />
+  <script src="../js/transitions.js" defer></script>
+  <style>
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      position: relative;
+      z-index: 1;
+      margin-top: 0.5rem;
+    }
+    .project-card-public {
+      background: linear-gradient(145deg, rgba(28, 28, 32, 0.95) 0%, rgba(14, 14, 16, 0.98) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+      cursor: pointer;
+    }
+    .project-card-public:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+    }
+    .project-card-public .card-media {
+      width: 100%;
+      height: 180px;
+      background: rgba(255, 255, 255, 0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: #555;
+      font-size: 2.5rem;
+    }
+    .project-card-public .card-media img,
+    .project-card-public .card-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .project-card-public .card-body {
+      padding: 1.15rem 1.25rem 1.35rem;
+    }
+    .project-card-public .card-cat {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 0.4rem;
+    }
+    .project-card-public .card-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #e8e8e8;
+      margin-bottom: 0.45rem;
+      line-height: 1.3;
+    }
+    .project-card-public .card-desc {
+      font-size: 0.88rem;
+      color: #999;
+      line-height: 1.55;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .project-card-public .card-files {
+      margin-top: 0.75rem;
+      font-size: 0.78rem;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    /* Modal for project detail */
+    .proj-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s, visibility 0.25s;
+    }
+    .proj-modal-overlay.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .proj-modal {
+      background: linear-gradient(145deg, rgba(28, 28, 32, 0.98) 0%, rgba(12, 12, 14, 0.99) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      max-width: 720px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 1.75rem;
+      position: relative;
+      transform: translateY(12px);
+      transition: transform 0.25s;
+    }
+    .proj-modal-overlay.is-open .proj-modal {
+      transform: translateY(0);
+    }
+    .proj-modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      border: none;
+      background: rgba(255, 255, 255, 0.08);
+      color: #ccc;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .proj-modal-close:hover {
+      background: rgba(255, 255, 255, 0.14);
+      color: #fff;
+    }
+    .proj-modal h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.35rem;
+      color: #f0f0f0;
+      margin-bottom: 0.35rem;
+      padding-right: 2.5rem;
+    }
+    .proj-modal .modal-meta {
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 1rem;
+    }
+    .proj-modal .modal-desc {
+      color: #b0b0b0;
+      font-size: 0.95rem;
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+    .modal-files {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .modal-file {
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .modal-file img,
+    .modal-file video {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 0.5rem;
+    }
+    .modal-file a {
+      color: #e0e0e0;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+    .modal-file a:hover {
+      text-decoration: underline;
+    }
+    .modal-file .file-type-icon {
+      font-size: 1.25rem;
+      color: #777;
+      width: 1.5rem;
+      text-align: center;
+    }
+    .admin-link {
+      position: fixed;
+      bottom: 1.25rem;
+      right: 1.25rem;
+      z-index: 40;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(20, 20, 24, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #888;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: all 0.2s;
+      opacity: 0.6;
+    }
+    .admin-link:hover {
+      opacity: 1;
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Mobile responsive — projects grid & modal */
+    @media (max-width: 640px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.15rem;
+      }
+      .project-card-public .card-media {
+        height: 160px;
+      }
+      .project-card-public .card-body {
+        padding: 1rem 1.1rem 1.2rem;
+      }
+      .proj-modal-overlay {
+        padding: 0.75rem;
+        align-items: flex-end;
+      }
+      .proj-modal {
+        max-height: 88vh;
+        padding: 1.35rem 1.15rem 1.5rem;
+        border-radius: 18px 18px 12px 12px;
+        max-width: 100%;
+      }
+      .proj-modal h2 {
+        font-size: 1.15rem;
+      }
+      .admin-link {
+        bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+        right: max(1rem, env(safe-area-inset-right, 0px));
+      }
+    }
+
+    @media (max-width: 400px) {
+      .project-card-public .card-media {
+        height: 140px;
+      }
+      .project-card-public .card-title {
+        font-size: 0.98rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="pageTransition" class="page-transition" aria-hidden="true">
+    <div class="pt-panel"></div>
+    <span class="pt-mark"></span>
+  </div>
+  <noscript><style>.page-transition{display:none!important;}</style></noscript>
+  <div class="site-bg" aria-hidden="true"></div>
+  <div class="pill-nav-container" id="navContainer">
+    <nav class="pill-nav" aria-label="Primary">
+      <a class="pill-logo" href="../index.html" aria-label="Home">
+        <span class="logo-dot"></span>
+      </a>
+      <div class="pill-nav-items desktop-only" id="navItems">
+        <ul class="pill-list" role="menubar">
+          <li role="none"><a role="menuitem" href="../index.html" class="pill" data-index="0"><span class="hover-circle" aria-hidden="true"></span><span class="label-stack"><span class="pill-label">Me</span><span class="pill-label-hover" aria-hidden="true">Me</span></span></a></li>
+          <li role="none"><a role="menuitem" href="about.html" class="pill" data-index="1"><span class="hover-circle" aria-hidden="true"></span><span class="label-stack"><span class="pill-label">About</span><span class="pill-label-hover" aria-hidden="true">About</span></span></a></li>
+          <li role="none"><a role="menuitem" href="projects.html" class="pill is-active" data-index="2"><span class="hover-circle" aria-hidden="true"></span><span class="label-stack"><span class="pill-label">Projects</span><span class="pill-label-hover" aria-hidden="true">Projects</span></span></a></li>
+          <li role="none"><a role="menuitem" href="skills.html" class="pill" data-index="3"><span class="hover-circle" aria-hidden="true"></span><span class="label-stack"><span class="pill-label">Skills</span><span class="pill-label-hover" aria-hidden="true">Skills</span></span></a></li>
+          <li role="none"><a role="menuitem" href="contact.html" class="pill" data-index="4"><span class="hover-circle" aria-hidden="true"></span><span class="label-stack"><span class="pill-label">Contact</span><span class="pill-label-hover" aria-hidden="true">Contact</span></span></a></li>
+        </ul>
+      </div>
+      <button class="mobile-menu-button mobile-only" id="hamburger" aria-label="Toggle menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </nav>
+    <div class="mobile-menu-popover mobile-only" id="mobileMenu">
+      <ul class="mobile-menu-list">
+        <li><a href="../index.html" class="mobile-menu-link">Me</a></li>
+        <li><a href="about.html" class="mobile-menu-link">About</a></li>
+        <li><a href="projects.html" class="mobile-menu-link is-active">Projects</a></li>
+        <li><a href="skills.html" class="mobile-menu-link">Skills</a></li>
+        <li><a href="contact.html" class="mobile-menu-link">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="projects-section">
+    <div class="projects-ambient" aria-hidden="true">
+      <span class="projects-orb projects-orb-1"></span>
+      <span class="projects-orb projects-orb-2"></span>
+      <span class="projects-grid-lines"></span>
+    </div>
+
+    <h1 class="exp-heading">
+      <span class="title-line">Projects</span>
+    </h1>
+    <p class="projects-subheading">A Glimpse of My Work</p>
+
+    <div id="projectsGrid" class="projects-grid"></div>
+  </section>
+
+  <!-- Project detail modal -->
+  <div id="projModal" class="proj-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="proj-modal">
+      <button class="proj-modal-close" id="modalClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+      <h2 id="modalTitle"></h2>
+      <p class="modal-meta" id="modalMeta"></p>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-files" id="modalFiles"></div>
+    </div>
+  </div>
+
+  <a href="dashboard.html" class="admin-link" title="Admin Dashboard"><i class="fa-solid fa-lock"></i></a>
+
+  <script src="../js/pillnav.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/smooth.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase-config.js"></script>
+  <script>
+    (function () {
+      const grid = document.getElementById('projectsGrid');
+      const modal = document.getElementById('projModal');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalMeta = document.getElementById('modalMeta');
+      const modalDesc = document.getElementById('modalDesc');
+      const modalFiles = document.getElementById('modalFiles');
+      const modalClose = document.getElementById('modalClose');
+
+      function fileIcon(type, name) {
+        if (type && type.startsWith('image/')) return 'fa-image';
+        if (type && type.startsWith('video/')) return 'fa-video';
+        if (type && type.startsWith('audio/')) return 'fa-music';
+        if (type === 'application/pdf' || (name && name.endsWith('.pdf'))) return 'fa-file-pdf';
+        if (name && name.match(/\.(doc|docx)$/i)) return 'fa-file-word';
+        if (name && name.match(/\.(txt|md)$/i)) return 'fa-file-lines';
+        return 'fa-file';
+      }
+
+      function escapeHtml(str) {
+        const d = document.createElement('div');
+        d.textContent = str || '';
+        return d.innerHTML;
+      }
+
+      function renderGrid(projects) {
+        if (!grid) return;
+        grid.innerHTML = '';
+        if (!projects.length) return;
+
+        projects.forEach((p) => {
+          const card = document.createElement('article');
+          card.className = 'project-card-public';
+          card.dataset.id = p.id;
+
+          let media = `<div class="card-media"><i class="fa-solid fa-folder-open"></i></div>`;
+          if (p.files && p.files.length) {
+            const isImage = (f) => (f.type && f.type.startsWith('image/')) || (f.name && /\.(jpe?g|png|gif|webp|bmp|svg)$/i.test(f.name));
+            const isVideo = (f) => (f.type && f.type.startsWith('video/')) || (f.name && /\.(mp4|webm|mov|mkv|avi)$/i.test(f.name));
+            const imgFile = p.files.find(f => isImage(f) && f.url);
+            const vidFile = p.files.find(f => isVideo(f) && f.url);
+            if (imgFile) {
+              media = `<div class="card-media"><img src="${imgFile.url}" alt="${escapeHtml(p.title)}" loading="lazy" /></div>`;
+            } else if (vidFile) {
+              media = `<div class="card-media"><video src="${vidFile.url}" muted preload="metadata"></video></div>`;
+            } else {
+              const f = p.files[0];
+              media = `<div class="card-media"><i class="fa-solid ${fileIcon(f.type, f.name)}"></i></div>`;
+            }
+          }
+
+          card.innerHTML = `
+            ${media}
+            <div class="card-body">
+              <div class="card-cat">${escapeHtml(p.category || 'Other')}</div>
+              <h3 class="card-title">${escapeHtml(p.title)}</h3>
+              ${p.description ? `<p class="card-desc">${escapeHtml(p.description)}</p>` : ''}
+              <div class="card-files"><i class="fa-solid fa-paperclip"></i> ${(p.files || []).length} file(s)</div>
+            </div>
+          `;
+          card.addEventListener('click', () => openModal(p));
+          grid.appendChild(card);
+        });
+      }
+
+      function openModal(p) {
+        modalTitle.textContent = p.title;
+        const dateStr = p.created_at_ms
+          ? new Date(p.created_at_ms).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })
+          : '';
+        modalMeta.textContent = [p.category, dateStr].filter(Boolean).join(' · ');
+        modalDesc.textContent = p.description || '';
+        modalDesc.style.display = p.description ? 'block' : 'none';
+
+        modalFiles.innerHTML = '';
+        (p.files || []).forEach((f) => {
+          const wrap = document.createElement('div');
+          wrap.className = 'modal-file';
+          const url = f.url || '';
+          if (f.type && f.type.startsWith('image/') && url) {
+            wrap.innerHTML = `
+              <div style="width:100%">
+                <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem">
+                  <i class="fa-solid fa-image file-type-icon"></i>
+                  <span style="color:#ccc;font-size:0.9rem">${escapeHtml(f.name)}</span>
+                </div>
+                <img src="${url}" alt="${escapeHtml(f.name)}" />
+              </div>`;
+          } else if (f.type && f.type.startsWith('video/') && url) {
+            wrap.innerHTML = `
+              <div style="width:100%">
+                <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem">
+                  <i class="fa-solid fa-video file-type-icon"></i>
+                  <span style="color:#ccc;font-size:0.9rem">${escapeHtml(f.name)}</span>
+                </div>
+                <video src="${url}" controls style="width:100%;border-radius:10px;max-height:360px"></video>
+              </div>`;
+          } else if (f.type && f.type.startsWith('audio/') && url) {
+            wrap.innerHTML = `
+              <i class="fa-solid fa-music file-type-icon"></i>
+              <div style="flex:1">
+                <div style="color:#ccc;font-size:0.9rem;margin-bottom:0.35rem">${escapeHtml(f.name)}</div>
+                <audio src="${url}" controls style="width:100%"></audio>
+              </div>`;
+          } else {
+            wrap.innerHTML = `
+              <i class="fa-solid ${fileIcon(f.type, f.name)} file-type-icon"></i>
+              <a href="${url}" target="_blank" rel="noopener" download="${escapeHtml(f.name)}">${escapeHtml(f.name)}</a>
+            `;
+          }
+          modalFiles.appendChild(wrap);
+        });
+
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modal.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+
+      modalClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+      function loadProjects() {
+        const cfg = window.SUPABASE_CONFIG;
+        if (!cfg || !cfg.url || cfg.url === 'YOUR_SUPABASE_URL') {
+          console.warn('Supabase not configured');
+          return;
+        }
+        if (typeof supabase === 'undefined' || !supabase.createClient) {
+          console.error('Supabase SDK missing');
+          return;
+        }
+        const sb = supabase.createClient(cfg.url, cfg.anonKey);
+        sb.from('projects')
+          .select('*')
+          .then(({ data, error }) => {
+            if (error) {
+              console.error(error);
+              return;
+            }
+            var list = (data || []).slice().sort(function (a, b) {
+              var ao = a.sort_order != null ? Number(a.sort_order) : Number(a.created_at_ms || 0);
+              var bo = b.sort_order != null ? Number(b.sort_order) : Number(b.created_at_ms || 0);
+              if (ao !== bo) return ao - bo;
+              return Number(b.created_at_ms || 0) - Number(a.created_at_ms || 0);
+            });
+            renderGrid(list);
+          });
+      }
+
+      loadProjects();
+    })();
+  </script>
+</body>
+</html>

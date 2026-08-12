@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Syed Awais Mahmood</title>
+  <link rel="icon" type="image/png" href="../images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@600;700;800;900&display=swap" as="style" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/pillnav.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/transitions.css" />
+  <link rel="prefetch" href="../pages/projects.html" />
+  <script src="../js/transitions.js" defer></script>
+</head>
+<body>
+  <div id="pageTransition" class="page-transition" aria-hidden="true">
+    <div class="pt-panel"></div>
+    <span class="pt-mark"></span>
+  </div>
+  <noscript><style>.page-transition{display:none!important;}</style></noscript>
+  <div class="site-bg" aria-hidden="true"></div>
+
+  <!-- ========== LOGIN SCREEN ========== -->
+  <div id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <a href="projects.html" class="login-back" title="Back to Projects">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Projects</span>
+      </a>
+      <div class="login-logo">
+        <img src="../images/favicon.png" alt="Logo" class="login-favicon" />
+      </div>
+      <h1 class="login-title">Admin Dashboard</h1>
+      <p class="login-subtitle">Sign in to manage your projects</p>
+      <form id="loginForm" autocomplete="on">
+        <div class="form-group">
+          <label for="username">Email</label>
+          <input type="text" id="username" name="username" placeholder="Enter email" required autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="password-wrap">
+            <input type="password" id="password" name="password" placeholder="Enter password" required autocomplete="current-password" />
+            <button type="button" class="toggle-pass" id="togglePass" aria-label="Show password">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+        <p id="loginError" class="login-error" hidden>Invalid email or password</p>
+        <button type="submit" class="btn-primary btn-full">
+          <i class="fa-solid fa-right-to-bracket"></i> Sign In
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========== DASHBOARD ========== -->
+  <div id="dashboard" class="dashboard is-hidden" hidden>
+    <header class="dash-header">
+      <div class="dash-header-left">
+        <a href="../index.html" class="dash-back" title="Back to portfolio">
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <h1 class="dash-title">Project Dashboard</h1>
+      </div>
+      <div class="dash-header-right">
+        <a href="projects.html" class="btn-ghost" target="_blank">
+          <i class="fa-solid fa-eye"></i> View Projects
+        </a>
+        <button id="logoutBtn" class="btn-ghost btn-danger">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
+      </div>
+    </header>
+
+    <main class="dash-main">
+      <!-- Upload Panel -->
+      <section class="dash-panel upload-panel">
+        <h2 class="panel-title"><i class="fa-solid fa-cloud-arrow-up"></i> Upload New Project</h2>
+        <form id="uploadForm">
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="projTitle">Project Title *</label>
+              <input type="text" id="projTitle" placeholder="e.g. Brand Identity Redesign" required />
+            </div>
+            <div class="form-group flex-1">
+              <label for="projCategory">Category</label>
+              <select id="projCategory">
+                <option value="Design">Design</option>
+                <option value="Video">Video</option>
+                <option value="Writing">Writing</option>
+                <option value="Web">Web</option>
+                <option value="Document">Document</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group" id="customCategoryGroup" hidden>
+            <label for="customCategory">Custom Category</label>
+            <input type="text" id="customCategory" placeholder="Type your own category…" maxlength="40" />
+          </div>
+          <div class="form-group">
+            <label for="projDesc">Description</label>
+            <textarea id="projDesc" rows="3" placeholder="Short description of the project..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>Files (images, videos, documents, text…)</label>
+            <div class="drop-zone" id="dropZone">
+              <input type="file" id="fileInput" multiple accept="image/*,video/*,audio/*,.pdf,.doc,.docx,.txt,.md,.rtf,.zip,.rar,.csv,.xlsx,.pptx" />
+              <div class="drop-content">
+                <i class="fa-solid fa-cloud-arrow-up drop-icon"></i>
+                <p>Drag & drop files here or <span class="link-like">browse</span></p>
+                <p class="drop-hint">Images, videos, PDFs & more (up to 50 MB per file on free plan)</p>
+              </div>
+            </div>
+            <div id="fileList" class="file-list"></div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-primary" id="uploadBtn">
+              <i class="fa-solid fa-plus"></i> Add Project
+            </button>
+            <button type="button" class="btn-ghost" id="clearFormBtn">Clear</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Projects List -->
+      <section class="dash-panel list-panel">
+        <div class="panel-header">
+          <h2 class="panel-title"><i class="fa-solid fa-folder-open"></i> Your Projects <span id="projCount" class="badge">0</span> <span class="sort-hint">Use ↑↓ to reorder</span></h2>
+          <button id="clearAllBtn" class="btn-ghost btn-sm btn-danger" title="Delete all projects">
+            <i class="fa-solid fa-trash"></i> Clear All
+          </button>
+        </div>
+        <div id="projectsList" class="projects-list">
+          <p class="empty-state" id="emptyState">No projects yet. Upload your first one above.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+
+
+
+  <!-- Confirm delete modal -->
+  <div id="confirmModal" class="confirm-overlay" hidden>
+    <div class="confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+      <div class="confirm-icon"><i class="fa-solid fa-trash"></i></div>
+      <h3 id="confirmTitle" class="confirm-title">Delete project?</h3>
+      <p id="confirmMessage" class="confirm-message">This action cannot be undone.</p>
+      <div class="confirm-actions">
+        <button type="button" class="btn-ghost" id="confirmCancel">Cancel</button>
+        <button type="button" class="btn-primary btn-danger-solid" id="confirmOk">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase-config.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>

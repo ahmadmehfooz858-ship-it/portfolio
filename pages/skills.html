@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skills | Syed Awais Mahmood</title>
+  <link rel="icon" type="image/png" href="../images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@600;700;800;900&display=swap" as="style" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/pillnav.css" />
+  <link rel="stylesheet" href="../css/transitions.css" />
+  <!-- Warm the cache for the other pages so navigating feels instant -->
+  <link rel="prefetch" href="../index.html" />
+  <link rel="prefetch" href="../pages/about.html" />
+  <link rel="prefetch" href="../pages/projects.html" />
+  <link rel="prefetch" href="../pages/contact.html" />
+  <script src="../js/transitions.js" defer></script>
+</head>
+<body>
+  <div id="pageTransition" class="page-transition" aria-hidden="true">
+    <div class="pt-panel"></div>
+    <span class="pt-mark"></span>
+  </div>
+  <noscript><style>.page-transition{display:none!important;}</style></noscript>
+  <div class="site-bg" aria-hidden="true"></div>
+  <div class="pill-nav-container" id="navContainer">
+    <nav class="pill-nav" aria-label="Primary">
+      <a class="pill-logo" href="../index.html" aria-label="Home">
+        <span class="logo-dot"></span>
+      </a>
+      <div class="pill-nav-items desktop-only" id="navItems">
+        <ul class="pill-list" role="menubar">
+          <li role="none"><a role="menuitem" href="../index.html" class="pill" data-index="0"><span class="hover-circle" aria-hidden="true"></span><span class="label-stack"><span class="pill-label">Me</span><span class="pill-label-hover" aria-hidden="true">Me</span></span></a></li>
+          <li role="none"><a role="menuitem" href="about.html" class="pill" data-index="1"><span class="hover-circle" aria-hidden="true"></span><span class="label-stack"><span class="pill-label">About</span><span class="pill-label-hover" aria-hidden="true">About</span></span></a></li>
+          <li role="none"><a role="menuitem" href="projects.html" class="pill" data-index="2"><span class="hover-circle" aria-hidden="true"></span><span class="label-stack"><span class="pill-label">Projects</span><span class="pill-label-hover" aria-hidden="true">Projects</span></span></a></li>
+          <li role="none"><a role="menuitem" href="skills.html" class="pill is-active" data-index="3"><span class="hover-circle" aria-hidden="true"></span><span class="label-stack"><span class="pill-label">Skills</span><span class="pill-label-hover" aria-hidden="true">Skills</span></span></a></li>
+          <li role="none"><a role="menuitem" href="contact.html" class="pill" data-index="4"><span class="hover-circle" aria-hidden="true"></span><span class="label-stack"><span class="pill-label">Contact</span><span class="pill-label-hover" aria-hidden="true">Contact</span></span></a></li>
+        </ul>
+      </div>
+      <button class="mobile-menu-button mobile-only" id="hamburger" aria-label="Toggle menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </nav>
+    <div class="mobile-menu-popover mobile-only" id="mobileMenu">
+      <ul class="mobile-menu-list">
+        <li><a href="../index.html" class="mobile-menu-link">Me</a></li>
+        <li><a href="about.html" class="mobile-menu-link">About</a></li>
+        <li><a href="projects.html" class="mobile-menu-link">Projects</a></li>
+        <li><a href="skills.html" class="mobile-menu-link is-active">Skills</a></li>
+        <li><a href="contact.html" class="mobile-menu-link">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="skills-section">
+    <!-- Decorative ambient visuals -->
+    <div class="skills-ambient" aria-hidden="true">
+      <span class="skills-orb skills-orb-1"></span>
+      <span class="skills-orb skills-orb-2"></span>
+      <span class="skills-orb skills-orb-3"></span>
+      <span class="skills-grid-lines"></span>
+    </div>
+
+    <h1 class="exp-heading">
+      <span class="title-line">My Skills</span>
+    </h1>
+
+    <!-- Primary skill — Computer Operator -->
+    <article class="skill-primary">
+      <div class="skill-primary-glow" aria-hidden="true"></div>
+      <div class="skill-primary-badge">Core Expertise</div>
+      <div class="skill-primary-inner">
+        <div class="skill-primary-body">
+          <h2 class="skill-primary-title">Computer Operator</h2>
+          <p class="skill-primary-desc">
+            My strongest and primary skill. I handle day-to-day system operations with precision —
+            monitoring systems, managing data, processing records, and keeping digital workflows
+            reliable. From institutional labs to high-volume retail environments, I deliver accurate,
+            disciplined computer operations that businesses depend on.
+          </p>
+          <ul class="skill-primary-tags">
+            <li>System Monitoring</li>
+            <li>Data Entry &amp; Management</li>
+            <li>Office Operations</li>
+            <li>Cash &amp; Record Handling</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- Languages & Expertise — side by side -->
+    <div class="skills-split">
+      <div class="skills-split-col">
+        <h3 class="skills-split-heading">Languages</h3>
+        <ul class="skills-split-list">
+          <li>English</li>
+          <li>Punjabi</li>
+          <li>Urdu</li>
+        </ul>
+      </div>
+      <div class="skills-split-divider" aria-hidden="true"></div>
+      <div class="skills-split-col">
+        <h3 class="skills-split-heading">Expertise</h3>
+        <ul class="skills-split-list">
+          <li>Management Skills</li>
+          <li>Creativity</li>
+          <li>Critical Thinking</li>
+          <li>Leadership</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="skills-sublabel-row">
+      <p class="skills-sublabel">Also proficient in</p>
+      <div class="skills-sublabel-line" aria-hidden="true"></div>
+    </div>
+
+    <!-- Secondary skills grid -->
+    <div class="skills-grid">
+      <article class="skill-card" data-accent="a">
+        <div class="skill-card-media">
+          <div class="skill-card-photo">
+            <img loading="lazy" decoding="async" src="../images/skill-content-writing.jpg" alt="Content Writing" />
+          </div>
+        </div>
+        <div class="skill-card-body">
+          <h3 class="skill-card-title">Content Writing</h3>
+          <p class="skill-card-desc">
+            Clear, structured writing for scripts, web copy, and professional documents. I turn ideas into readable content that fits the audience and purpose.
+          </p>
+        </div>
+      </article>
+
+      <article class="skill-card" data-accent="b">
+        <div class="skill-card-media">
+          <div class="skill-card-photo">
+            <img loading="lazy" decoding="async" src="../images/skill-video-editing.png" alt="Photo / Video Editing" />
+          </div>
+        </div>
+        <div class="skill-card-body">
+          <h3 class="skill-card-title">Photo / Video Editing</h3>
+          <p class="skill-card-desc">
+            Editing stills and short videos for clean presentation — crop, color, cuts, and polish. Practical visuals that look professional without overcomplication.
+          </p>
+        </div>
+      </article>
+
+      <article class="skill-card" data-accent="c">
+        <div class="skill-card-media">
+          <div class="skill-card-photo">
+            <img loading="lazy" decoding="async" src="../images/skill-document-translating.png" alt="Document Translating" />
+          </div>
+        </div>
+        <div class="skill-card-body">
+          <h3 class="skill-card-title">Document Translating</h3>
+          <p class="skill-card-desc">
+            Accurate translation of documents while keeping meaning and tone intact. Careful with terminology so the final text stays clear and usable.
+          </p>
+        </div>
+      </article>
+
+      <article class="skill-card" data-accent="d">
+        <div class="skill-card-media">
+          <div class="skill-card-photo">
+            <img loading="lazy" decoding="async" src="../images/skill-logo-designing.png" alt="Logo Designing" />
+          </div>
+        </div>
+        <div class="skill-card-body">
+          <h3 class="skill-card-title">Logo Designing</h3>
+          <p class="skill-card-desc">
+            Simple, memorable logos and marks for brands and personal projects. Focus on clean shapes, balance, and a look that works at any size.
+          </p>
+        </div>
+      </article>
+
+      <article class="skill-card" data-accent="e">
+        <div class="skill-card-media">
+          <div class="skill-card-photo">
+            <img loading="lazy" decoding="async" src="../images/skill-database-office.png" alt="Database / Office Management" />
+          </div>
+        </div>
+        <div class="skill-card-body">
+          <h3 class="skill-card-title">Database / Office Management</h3>
+          <p class="skill-card-desc">
+            Organizing records, files, and day-to-day office systems so work stays trackable. Reliable handling of data entry, filing, and routine office processes.
+          </p>
+        </div>
+      </article>
+
+      <article class="skill-card" data-accent="f">
+        <div class="skill-card-media">
+          <div class="skill-card-photo">
+            <img loading="lazy" decoding="async" src="../images/skill-website-handling.png" alt="Website Handling" />
+          </div>
+        </div>
+        <div class="skill-card-body">
+          <h3 class="skill-card-title">Website Handling</h3>
+          <p class="skill-card-desc">
+            Managing and updating websites — content changes, basic setup, and day-to-day upkeep. Keeping pages accurate, current, and easy for visitors to use.
+          </p>
+        </div>
+      </article>
+    </div>
+
+  </section>
+
+  <script src="../js/pillnav.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/smooth.js"></script>
+  <script>
+    (function () {
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+        document.querySelectorAll('.skill-primary, .skill-card, .skills-split, .skills-sublabel-row, .exp-heading').forEach(function (el) {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        });
+        return;
+      }
+
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.config({ force3D: true, nullTargetWarn: false });
+      gsap.ticker.lagSmoothing(500, 33);
+      ScrollTrigger.config({ limitCallbacks: true, ignoreMobileResize: true });
+
+      function reveal(el, fromY) {
+        var inView = el.getBoundingClientRect().top < window.innerHeight * 0.92;
+        gsap.set(el, { opacity: inView ? 1 : 0, y: inView ? 0 : fromY, force3D: true });
+        gsap.to(el, {
+          opacity: 1,
+          y: 0,
+          duration: 0.65,
+          ease: 'power2.out',
+          force3D: true,
+          overwrite: 'auto',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 90%',
+            end: 'bottom top',
+            toggleActions: 'play reverse play reverse',
+            fastScrollEnd: true,
+            preventOverlaps: true,
+            anticipatePin: 0
+          }
+        });
+      }
+
+      document.querySelectorAll('.exp-heading').forEach(function (h) {
+        reveal(h, 20);
+      });
+      document.querySelectorAll('.skill-primary, .skills-split, .skills-sublabel-row, .skill-card').forEach(function (el) {
+        reveal(el, 28);
+      });
+
+      // One refresh after layout settles — avoids mid-scroll recalcs
+      requestAnimationFrame(function () {
+        ScrollTrigger.refresh();
+      });
+    })();
+  </script>
+</body>
+</html>

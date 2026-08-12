@@ -1,0 +1,44 @@
+/* ========== PAGE TRANSITION OVERLAY ==========
+   A lightweight, dependency-free curtain wipe played
+   when entering a page and when leaving it for another
+   internal page. Covers by default (no flash), JS animates it. */
+
+.page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  pointer-events: none;
+  visibility: visible;
+}
+
+.page-transition .pt-panel {
+  position: absolute;
+  inset: 0;
+  background: #050505;
+  transform: scaleY(1);
+  transform-origin: bottom;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.page-transition .pt-mark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 50%;
+  background: #e8e8e8;
+  opacity: 0;
+  transform: scale(0.5);
+  box-shadow: 0 0 18px 2px rgba(232, 232, 232, 0.35);
+  will-change: opacity, transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition .pt-panel,
+  .page-transition .pt-mark {
+    transition: none !important;
+  }
+}
