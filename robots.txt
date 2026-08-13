@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://awaismehmmod.netlify.app/sitemap.xml
+Sitemap: https://syed-awais-mehmood.netlify.app/sitemap.xml
