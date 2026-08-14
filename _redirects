@@ -1,5 +1,13 @@
-/pages/about      /pages/about.html    200
-/pages/projects   /pages/projects.html 200
-/pages/skills     /pages/skills.html   200
-/pages/contact    /pages/contact.html  200
-/pages/dashboard  /pages/dashboard.html 200
+# Short clean URLs
+/about       /pages/about.html      200
+/projects    /pages/projects.html   200
+/skills      /pages/skills.html     200
+/contact     /pages/contact.html    200
+/dashboard   /pages/dashboard.html  200
+
+# /pages/* without .html (already works on Netlify, kept for clarity)
+/pages/about      /pages/about.html      200
+/pages/projects   /pages/projects.html   200
+/pages/skills     /pages/skills.html     200
+/pages/contact    /pages/contact.html    200
+/pages/dashboard  /pages/dashboard.html  200
